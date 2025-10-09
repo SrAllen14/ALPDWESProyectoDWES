@@ -61,17 +61,24 @@ Este documento es una guía detallada del proceso de instalación y configuraci�
 Para comprobar todos estos valores debemos usar los siguientes comandos:
 ```bash
 hostname
-sudo hostnamectl          #Comprobar el nombre, el sistema operativo, la arquitectura, etc...
+sudo hostnamectl                                # Comprobar el nombre, el sistema operativo, la arquitectura, etc...
+sudo hostnamectl set-hostname "nombre"          # Cambiar el nombre de la máquina.
+sudo nano /etc/hosts                            # Modificar las siguientes lineas de este archivo.
 
-free -h                   #Comprobar la RAM total, en uso y libre. Parámetro -h para que salga  en Gb
+127.0.0.1 localhost
+127.0.1.1 alp_used2                             # En esta línea modificamos el nombre por el nuevo.
+
+free -h                                         # Comprobar la RAM total, en uso y libre. Parámetro -h para que salga  en Gb
 
 lsblk
-sudo fdisk -l /dev/sda    #Comprobar las distintas particiones del disco, su tamaño y su raíz
+sudo fdisk -l /dev/sda                          # Comprobar las distintas particiones del disco, su tamaño y su raíz
 
 ip a
-ip r                      #Comprobar IP y GW como se ve en las capturas de abajo
+ip r                                            # Comprobar IP y GW como se ve en las capturas de abajo
 
-sudo resolvectl status    #Comprobar el DNS (educa.jcyl.es)
+sudo resolvectl status                          # Comprobar el DNS (educa.jcyl.es)
+
+date                                            # Comprobar la fecha y hora
 ```
 
 
@@ -114,8 +121,25 @@ sudo apt upgrade
 > - [X] miadmin2/paso
 
 #### **Habilitar cortafuegos**
+Para comprobar el estado del cortafuegos y saber si está activado o desactivado, debemos usar el siguiente comando:
 
-como activar cortafuegos
+```bash
+sudo systemctl status ufw                           # Mostrar el status del cortafuegos.
+sudo systemctl start|restart ufw                    # Arrancar el cortafuegos.
+```
+
+De la misma manera podemos comprobar el SSH:
+
+```bash
+sudo systemctl status ssh                           # Mostrar el status del servicio SSH.
+sudo systemctl start|restart ssh                    # Arrancar el servicio SSH.
+
+# A mayores tenemos que comprobar el puerto del cortafuegos ufw 22.
+sudo ufw status numbered
+
+# Normalmente va a estar activo el puerto 22 y el puerto 22 v6. Éste último hay que borrarlo.
+sudo ufw delete "numeropuerto"
+```
 
 ### 1.1.2 Instalación del servidor web
 
@@ -158,9 +182,35 @@ Una vez creado el usuario tenemos que darle privilegios de sudo, es decir, meter
 
 ```bash
 sudo usermod -aG sudo miadmin2          
-#Meter al usuario miadmin2 en el grupo sudo sin quitarle del resto de grupos que pertenece y -G indica los grupos suplementarios a los que quieres añadir el usuario.
+# Meter al usuario miadmin2 en el grupo sudo sin quitarle del resto de grupos que pertenece y -G indica los grupos suplementarios a los que quieres añadir el usuario.
+# Ahora lo que tenemos que hacer es el meter a miadmin2 en los mismos grupos que miadmin usando este comando y listando
+  con cat /etc/group | grep miadmin
+
+**Comandos recomendados**
+sudo deluser "nombreusuario"            # Borra el usuario indicado.
+su nombreusuario                        # Inicia sesión en el usuario indicado.
+exit                                    # Para salir de la sesión actual.
 ```
 
+
+Ahora vamos a crear el usuario "operadoweb" que será el encargado de subir archivos al servidor. Solo podrá tener acceso a su carpeta ráiz
+que es /var/www/html y pertenecerá al grupo www-data
+
+```bash
+sudo adduser --home /var/www/html --ingroup www-data --shell /bin/bash operadorweb
+
+# Ahora debemos cambiar el dueño de la carpeta /var/www/html para que pertenezca a operadorweb
+sudo chown -R operadorweb:www-data /var/www/html            # Cambia el propietario y el grupo del directorio indicado.
+sudo chmod -R 775 /var/www/html                             # Cambia los permisos del usuario propietario, del grupo y del resto de propieatarios.
+
+# Para comprobar que los cambios han surgido efecto debemos hacer lo siguiente:
+ls -al /var/www/html
+
+drwxrwxr-x 2 operadorweb www-data  4096 oct  9 10:30 .
+drwxr-xr-x 3 root        root      4096 oct  9 10:30 ..
+-rwxrwxr-x 1 operadorweb www-data 10671 oct  9 10:30 index.html
+
+```
 ### 1.1.3 PHP
 #### Instalación de PHP en el servidor apache
 Una vez actualizado el sistema y mejorado los paquetes (update y upgrade) debemos de realizar los siguientes pasos:
