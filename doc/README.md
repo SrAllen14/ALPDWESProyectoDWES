@@ -29,7 +29,7 @@
         - [**Nombre y configuración de red**](#nombre-y-configuración-de-red-1)
         - [**Cuentas administradoras**](#cuentas-administradoras-1)
       - [1.2.2 **Navegadores**](#122-navegadores)
-      - [1.2.3 **FileZilla**](#123-filezilla)
+      - [1.2.3 **MobaXterm**](#123-filezilla)
       - [1.2.4 **Netbeans**](#124-netbeans)
       - [1.2.5 **Visual Studio Code**](#125-visual-studio-code)
   - [2. GitHub](#2-github)
