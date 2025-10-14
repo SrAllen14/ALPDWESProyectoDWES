@@ -29,7 +29,7 @@
         - [**Nombre y configuración de red**](#nombre-y-configuración-de-red-1)
         - [**Cuentas administradoras**](#cuentas-administradoras-1)
       - [1.2.2 **Navegadores**](#122-navegadores)
-      - [1.2.3 **MobaXterm**](#123-filezilla)
+      - [1.2.3 **MobaXterm**](#123-MobaXterm)
       - [1.2.4 **Netbeans**](#124-netbeans)
       - [1.2.5 **Visual Studio Code**](#125-visual-studio-code)
   - [2. GitHub](#2-github)
@@ -325,8 +325,46 @@ se encuentra el archivo que acabamos de modificar.
 #### **Nombre y configuración de red**
 #### **Cuentas administradoras**
 ### 1.2.2 **Navegadores**
-### 1.2.3 **FileZilla**
+Aquí se especifican los navegadores que solemos utilizar para la interpretación y visualización de
+nuestras aplicaciones web. También se indican las extensiones instaladas en cada uno.
+
+> **Navegadores y extensiones**
+>
+> Edge: Color Picker - Native Eyedropper
+>
+> Chrome: ColorZilla
+### 1.2.3 **MobaXterm**
+Esta aplicación permite conectarse a un servidor mediante un amplio abanico de protocolos.
+En nuestro caso, los dos protocolos que vamos a utilizar son SFTP para la gestión de archivos y 
+directorios del servidor apache y SSH para realizar cambios en los ficheros de configuración.
+
+> **Versión**: MobaXterm Personal Edition v25.2 Build 5296
+
+Una vez descargada e instalada la versión siguiendo los pasos (en clase tenemos la versión portable),
+iniciamos la aplicación.
+Para conectar un dispositivo por SSH debemos realizar los siguientes pasos:
+> Pulsamos el botón Session con una pantalla como símbolo.
+
+> Seleccionamos SSH como protocolo de conexión.
+
+> Introducimos en el apartado Remote host la IP del ordenador al que queremos conectarnos. También 
+se puede especificar al usuario al que queremos conectarnos en el apartado Specify username, pero no 
+es obligatorio.
+
+> Se nos abrirá un terminal donde iniciaremos sesión con un usuario y una contraseña valida.
+
+
+Para conectar un dispositovo por SFTP para la transferencia de datos debemos realizar los siguientes pasos:
+> Pulsamos el botón Session con una pantalla como símbolo.
+
+> Seleccionamos SFTP como protocolo de conexión
+
+> Introducimos la IP del ordenador al que queremos conectarnos en el apartado "Remote hosts" y, esta vez,
+si debemos especificar el usuario al que queremos conectarnos en el apartado "Username". Para nosotros es "operadorweb".
+
+> Comprobamos que nos encontramos en el directorio raiz /var/www/html y que podemos crear carpetas y archivos, modificarlos y eliminarlos.
 ### 1.2.4 **Netbeans**
+
 ### 1.2.5 **Visual Studio Code**
 
 # 2. GitHub
