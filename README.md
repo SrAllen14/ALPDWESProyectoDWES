@@ -53,15 +53,52 @@ Dicho de una manera correcta, las siguientes funciones son las que más usamos a
 (validar) los datos que se envían en ellas.\
 
 #### is_null()
-#### is_empty()
+La función is_null() es usada en muchos casos para comprobar si una variable o un array está definida como null o no.\
+>**Parámetro:** variable la cual se quiere evaluar.\
+>**Return:** true en caso de que sea null y false en caso de que no sea null.
+
+#### empty()
+La función empty() sirve para comprobar si una variable está vacía. Que una variable esté vacía implica que no exista, o que su valor sea igual a false.\
+En caso de que la variable no exista, la función no manda alerta ninguna.\
+>**Parámetros:** variable la cual se quiere evaluar.\
+>**Return:** en caso de estar vacia true y en caso de tener un valor que no sea igual a "false" devuelve false.
+
 #### isset()
+La función isset() determina si una variable es considerada definida, lo que significa que está declara y es diferente a null.\
+Si una variable ha sido destruida con la función unset(), ya no se considera como definida.\
+**Parámetro:** variable o variables (sin límite) las cuales se quieren evaluar.\
+**Return:** en caso de estar definida y ser desigual a null devuelve true y al contrario, si no ha sido definida o es igual a null, devuelve false.
+
 #### date()
+La función date() devuelve una cadena formateada según el formato indicado usando el integer timestamp (marca de tiempo) dado.
+En caso de no indicar parámetro devuelve el momento actual del servidor.\
+>**Parámetros:** format que indica el formato de la fecha usando expresiones como %s%h%m%M%d%i etc... y el timestamp que 
+es un parámetro opcional cuyo valor es un número entero con el valor de marca temporal.\
+>**Return:** cadena con la fecha formateada.
 
 ### Funciones de lectura y escritura de archivos.
+El siguiente listado pertenece a las funciones usadas para la importación y exportación de archivos, es decir, a la lectura de un archivo (json, xml, csv, etc...) y la creación y escritura de un archivo.
 
 #### basename()
+La función basename() devuelve el nombre del archivo según la ruta especificada.\
+>**Parámetros:** cadena de carateres con la ruta de un archivo. Puede ser ruta relativa o absoluta. suffix que es un parámetro opcional el cual nos quita el sufijo del archivo dejando solo el nombre del archivo.\
+>**Return:** cadena de carateres con el nombre del archivo de la ruta especificada.
+
 #### json_encode()
+La función json_encode() retorna una cadena de carateres que contiene la representación JSON del valor de una variable, un objeto, un array, etc... En el caso del objeto solo se codifican las propiedades públicas de éste.\
+>**Parámetros:**\
+> Value: puede ser desde un entero, hasta un string pasando por objetos, variables y arrays.\
+> Flag: que indica la máscara de bits.\
+> Depth: define la profundidad máxima que debe ser mayor que cero.\
+>**Return:** un JSON codificado como STRING en caso de éxito. Si hay algún error en el proceso se devuelve false.
+
 #### json_decode()
+La función json_decode() recupera una cadena codificada en JSON y la convierte en un valor PHP.\
+>**Parámetros:**\
+> json: un string json a codificar.\
+> asociative: en caso de ser true, los objetos JSON serán devueltos como arrays asociativos. Si es false, serán devueltos como objetos. En caso de ser null dependerá de los flags.
+> depth: profundidad máxima de anidamiento de la estructura en proceso de decodificación.
+>**Return:** ninguno.
 #### file_put_contents()
 
 ### Funciones de Log in-Log out
