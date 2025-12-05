@@ -87,20 +87,50 @@ La función basename() devuelve el nombre del archivo según la ruta especificad
 #### json_encode()
 La función json_encode() retorna una cadena de carateres que contiene la representación JSON del valor de una variable, un objeto, un array, etc... En el caso del objeto solo se codifican las propiedades públicas de éste.\
 >**Parámetros:**\
-> Value: puede ser desde un entero, hasta un string pasando por objetos, variables y arrays.\
-> Flag: que indica la máscara de bits.\
-> Depth: define la profundidad máxima que debe ser mayor que cero.\
+> - Value: puede ser desde un entero, hasta un string pasando por objetos, variables y arrays.\
+> - Flag: que indica la máscara de bits.\
+> - Depth: define la profundidad máxima que debe ser mayor que cero.\
 >**Return:** un JSON codificado como STRING en caso de éxito. Si hay algún error en el proceso se devuelve false.
 
 #### json_decode()
-La función json_decode() recupera una cadena codificada en JSON y la convierte en un valor PHP.\
->**Parámetros:**\
-> json: un string json a codificar.\
-> asociative: en caso de ser true, los objetos JSON serán devueltos como arrays asociativos. Si es false, serán devueltos como objetos. En caso de ser null dependerá de los flags.
-> depth: profundidad máxima de anidamiento de la estructura en proceso de decodificación.
+La función json_decode() recupera una cadena codificada en JSON y la convierte en un valor PHP.
+>**Parámetros:**
+> - json: un string json a codificar.
+> - asociative: en caso de ser true, los objetos JSON serán devueltos como arrays asociativos. Si es false, serán devueltos como objetos. En caso de ser null dependerá de los flags.
+> - depth: profundidad máxima de anidamiento de la estructura en proceso de decodificación.\
 >**Return:** ninguno.
 #### file_put_contents()
 
 ### Funciones de Log in-Log out
 
 #### header()
+La función header() permite especificar el encabezado HTTP string al enviar los ficheros HTML.\
+Nunca se olvide que la función debe ser llamada antes de que se envíe cualquier contenido, ya sea por líneas HTML habituales en el fichero, o por salidas PHP.
+>**Parámetros:**\
+> - Existen dos tipos: HTTP/ y Location\
+> - Location: devuelve un encabezado al cliente y, a mayores, envía un estado REDIRECT(302) al navegador siempre que no se haya envaido un código de estado 201 o 3xx.\
+>**Return:** ninguno.\
+
+**Ejemplo:**
+```bash
+<?php
+header("Location: http://www.example.com/"); /* Redirección del navegador */
+/* Asegúrese de que el código siguiente no se ejecute una vez realizada la redirección. */
+exit;
+?>
+```
+
+## Clases de PHP
+### DateTime
+La clase DateTime realiza, en esencia, la representación de la fecha y hora. Permite crear, manipular y formatear fechas y horas de forma flexible y orientada a objetos.\
+Esta clase nos permite:
+>- Crear un fechas a partir de cadenas, timestamps o la fecha actual con **new DateTime()**. (En caso de no pasar parámetros se crea un objeto con la fecha actual)\
+>- Modificar fechas usando métodos como **modify() add() y sub()** que, respectivamente, modificar la fecha pasada como parámetro, añadir una cantidad de tiempo a la fecha pasada por parámetro y restar una cantidad de tiempo igual que con add().\
+>- Formatear fechas mediante el uso de **format()** y %h, %m, %Y, etc...\
+>- Comparar fechas directamente con operadores o con métodos como **diff()** que devuelve un objeto DateInterval el cual especifica la diferencia entre las dos fechas.\
+
+Esta clase es más potente y segura que las funciones procedimentales tradicionales como date() y strtotime().
+### PDO
+### PDOStatement
+### PDOException
+### DOMDocument
