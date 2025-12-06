@@ -131,6 +131,43 @@ Esta clase nos permite:
 
 Esta clase es más potente y segura que las funciones procedimentales tradicionales como date() y strtotime().
 ### PDO
+La clase PDO (PHP Data Objects) proporciona una interfaz unificada para conectarse y trabajar con distintas bases de datos (MySLQ, PostgreSQL, SQLite, etc...) usando mismo conjunto de métodos.
+Con PDO puedes:
+>- Conectarte a una base de datos mediante DSN **(new PDO())**.
+>- Preparar y ejecutar consultas con **prepare()** y **execute()**, lo que mojora la seguridad frente a inyecciones SQL.
+>- Realizar consultas directas con **query()**.
+>- Realizar transacciones usando **beginTransaction()**, **commit()** y **rollBack()**.
+>- Configurar modos de error, juego de caracteres, opciones de fetch, etc.
+>- Obtener resultados con fetch() y fetchAll(), en distintos formatos (arrays asociativos, objetos, etc...).
+
+En definitiva, PDO proporciona una forma segura, flexible y portable de trabajar con bases de datos en PHP.
 ### PDOStatement
+La clase PDOStatement representa una sentencia preparada que ha sido genereda por un objeto PDO mediante prepare() o query(). Es el objeto que realmente se usa para ejecutar consultas y recuperar resultados.
+Con PDOStatement puedes:
+>- Ejecutar la sentencia con **execute()**, opcionalmente pasando parámetros.
+>- Vincular parámetros a la consulta con **bindParam()** y **bindValue()**.
+>- Obtener filas con **fetch()** o **fetchAll()**, pudiendo elegir formato.
+>- Consultar el número de finlas afectadas con **rowCount()**.
+>- Iterar directamente sobre el objeto como si fuera un iterador.
+>- Obtener metadatos de columnas mediante **columnMeta()**.
+
+Los objetos de las clase PDOStatement gestionan la ejecución y la consulta obtención de resultados dentro de PDO.
 ### PDOException
+La clase PDOException es la excepción que lanza la clase PDO cuando ocurre un error relacionado con la base de datos, siempre que el modo de error esté configurado para lanzar excepciones (PDO::ERRMODE_EXCEPTION).
+Sirve para: 
+>- Capturar y manejar errores de conexión o consulta mediante bloques try/catch.
+>- Obtener un mensaje descriptivo del error con **getMessage()**.
+>- Consultar el código del error **getCode()**, normalmente el código SQLSTATE.
+>- Ver el array errorInfo con detalles adicionales del fallo.
+
+PDOException permite gestionar de forma segura y controlada los errores que se producen al usar PDO.
 ### DOMDocument
+La clase DOMDocument es la principal de la extensión DOM de PHP y permite crear, leer, modificar y guardar documentos XML o HTML mediante una estructura de nodos.
+Con DOMDocument puedes:
+>- Cargar archivos XML/HTML desde cadenas o ficheros **(load(), loadXML(), loadHTML()**.
+>- Crea nuevos documentos y añadir nodos como elementos, atributos o texto **(createElement(), createTextNode(),...)**.
+>- Recorres y manipular la estructura del documento como un árbol DOM.
+>- Buscar nodos combinándolo con DOMXPath.
+>- Validar y guardar documentos con **save()** o **saveXML()**.
+
+DOMDocument es la herramientas de PHP para trabajar con XML/HTML usando el modelo DOM, permitiendo manipular documentos como si fueran árboles de nodos.
