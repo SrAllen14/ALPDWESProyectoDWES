@@ -87,20 +87,87 @@ La función basename() devuelve el nombre del archivo según la ruta especificad
 #### json_encode()
 La función json_encode() retorna una cadena de carateres que contiene la representación JSON del valor de una variable, un objeto, un array, etc... En el caso del objeto solo se codifican las propiedades públicas de éste.\
 >**Parámetros:**\
-> Value: puede ser desde un entero, hasta un string pasando por objetos, variables y arrays.\
-> Flag: que indica la máscara de bits.\
-> Depth: define la profundidad máxima que debe ser mayor que cero.\
+> - Value: puede ser desde un entero, hasta un string pasando por objetos, variables y arrays.\
+> - Flag: que indica la máscara de bits.\
+> - Depth: define la profundidad máxima que debe ser mayor que cero.\
 >**Return:** un JSON codificado como STRING en caso de éxito. Si hay algún error en el proceso se devuelve false.
 
 #### json_decode()
-La función json_decode() recupera una cadena codificada en JSON y la convierte en un valor PHP.\
->**Parámetros:**\
-> json: un string json a codificar.\
-> asociative: en caso de ser true, los objetos JSON serán devueltos como arrays asociativos. Si es false, serán devueltos como objetos. En caso de ser null dependerá de los flags.
-> depth: profundidad máxima de anidamiento de la estructura en proceso de decodificación.
+La función json_decode() recupera una cadena codificada en JSON y la convierte en un valor PHP.
+>**Parámetros:**
+> - json: un string json a codificar.
+> - asociative: en caso de ser true, los objetos JSON serán devueltos como arrays asociativos. Si es false, serán devueltos como objetos. En caso de ser null dependerá de los flags.
+> - depth: profundidad máxima de anidamiento de la estructura en proceso de decodificación.\
 >**Return:** ninguno.
 #### file_put_contents()
 
 ### Funciones de Log in-Log out
 
 #### header()
+La función header() permite especificar el encabezado HTTP string al enviar los ficheros HTML.\
+Nunca se olvide que la función debe ser llamada antes de que se envíe cualquier contenido, ya sea por líneas HTML habituales en el fichero, o por salidas PHP.
+>**Parámetros:**\
+> - Existen dos tipos: HTTP/ y Location\
+> - Location: devuelve un encabezado al cliente y, a mayores, envía un estado REDIRECT(302) al navegador siempre que no se haya envaido un código de estado 201 o 3xx.\
+>**Return:** ninguno.\
+
+**Ejemplo:**
+```bash
+<?php
+header("Location: http://www.example.com/"); /* Redirección del navegador */
+/* Asegúrese de que el código siguiente no se ejecute una vez realizada la redirección. */
+exit;
+?>
+```
+
+## Clases de PHP
+### DateTime
+La clase DateTime realiza, en esencia, la representación de la fecha y hora. Permite crear, manipular y formatear fechas y horas de forma flexible y orientada a objetos.\
+Esta clase nos permite:
+>- Crear un fechas a partir de cadenas, timestamps o la fecha actual con **new DateTime()**. (En caso de no pasar parámetros se crea un objeto con la fecha actual)\
+>- Modificar fechas usando métodos como **modify() add() y sub()** que, respectivamente, modificar la fecha pasada como parámetro, añadir una cantidad de tiempo a la fecha pasada por parámetro y restar una cantidad de tiempo igual que con add().\
+>- Formatear fechas mediante el uso de **format()** y %h, %m, %Y, etc...\
+>- Comparar fechas directamente con operadores o con métodos como **diff()** que devuelve un objeto DateInterval el cual especifica la diferencia entre las dos fechas.\
+
+Esta clase es más potente y segura que las funciones procedimentales tradicionales como date() y strtotime().
+### PDO
+La clase PDO (PHP Data Objects) proporciona una interfaz unificada para conectarse y trabajar con distintas bases de datos (MySLQ, PostgreSQL, SQLite, etc...) usando mismo conjunto de métodos.
+Con PDO puedes:
+>- Conectarte a una base de datos mediante DSN **(new PDO())**.
+>- Preparar y ejecutar consultas con **prepare()** y **execute()**, lo que mojora la seguridad frente a inyecciones SQL.
+>- Realizar consultas directas con **query()**.
+>- Realizar transacciones usando **beginTransaction()**, **commit()** y **rollBack()**.
+>- Configurar modos de error, juego de caracteres, opciones de fetch, etc.
+>- Obtener resultados con fetch() y fetchAll(), en distintos formatos (arrays asociativos, objetos, etc...).
+
+En definitiva, PDO proporciona una forma segura, flexible y portable de trabajar con bases de datos en PHP.
+### PDOStatement
+La clase PDOStatement representa una sentencia preparada que ha sido genereda por un objeto PDO mediante prepare() o query(). Es el objeto que realmente se usa para ejecutar consultas y recuperar resultados.
+Con PDOStatement puedes:
+>- Ejecutar la sentencia con **execute()**, opcionalmente pasando parámetros.
+>- Vincular parámetros a la consulta con **bindParam()** y **bindValue()**.
+>- Obtener filas con **fetch()** o **fetchAll()**, pudiendo elegir formato.
+>- Consultar el número de finlas afectadas con **rowCount()**.
+>- Iterar directamente sobre el objeto como si fuera un iterador.
+>- Obtener metadatos de columnas mediante **columnMeta()**.
+
+Los objetos de las clase PDOStatement gestionan la ejecución y la consulta obtención de resultados dentro de PDO.
+### PDOException
+La clase PDOException es la excepción que lanza la clase PDO cuando ocurre un error relacionado con la base de datos, siempre que el modo de error esté configurado para lanzar excepciones (PDO::ERRMODE_EXCEPTION).
+Sirve para: 
+>- Capturar y manejar errores de conexión o consulta mediante bloques try/catch.
+>- Obtener un mensaje descriptivo del error con **getMessage()**.
+>- Consultar el código del error **getCode()**, normalmente el código SQLSTATE.
+>- Ver el array errorInfo con detalles adicionales del fallo.
+
+PDOException permite gestionar de forma segura y controlada los errores que se producen al usar PDO.
+### DOMDocument
+La clase DOMDocument es la principal de la extensión DOM de PHP y permite crear, leer, modificar y guardar documentos XML o HTML mediante una estructura de nodos.
+Con DOMDocument puedes:
+>- Cargar archivos XML/HTML desde cadenas o ficheros **(load(), loadXML(), loadHTML()**.
+>- Crea nuevos documentos y añadir nodos como elementos, atributos o texto **(createElement(), createTextNode(),...)**.
+>- Recorres y manipular la estructura del documento como un árbol DOM.
+>- Buscar nodos combinándolo con DOMXPath.
+>- Validar y guardar documentos con **save()** o **saveXML()**.
+
+DOMDocument es la herramientas de PHP para trabajar con XML/HTML usando el modelo DOM, permitiendo manipular documentos como si fueran árboles de nodos.
